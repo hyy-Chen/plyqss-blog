@@ -23,11 +23,13 @@
 ### Task 1: Build a deterministic legacy HTML extractor
 
 **Files:**
+
 - Create: `scripts/extract_legacy_blog.mjs`
 - Create: `scripts/legacy-extract-map.json`
 - Test: `scripts/fixtures/legacy-extractor-fixture.html`
 
 **Interfaces:**
+
 - Consumes: old repository path and JSON map of article source paths, titles, dates, and public/private status.
 - Produces: Markdown files, copied referenced images, and a JSON extraction report containing title, URL, formula count, code block count, and asset list.
 
@@ -42,11 +44,13 @@
 ### Task 2: Recover and review the six public articles
 
 **Files:**
+
 - Create: `content/旧博客/` Markdown files for each recovered public post
 - Create: `content/旧博客/assets/` files referenced by public posts
 - Create: `scripts/legacy-extraction-report.json`
 
 **Interfaces:**
+
 - Consumes: `/tmp/hyy-chen.github.io` and Task 1 extractor.
 - Produces: six public Markdown posts with `date`, `tags`, and original dated `aliases`.
 
@@ -60,12 +64,14 @@
 ### Task 3: Configure encrypted `培琳` content
 
 **Files:**
+
 - Modify: `quartz.config.yaml:116-118`
 - Create: `scripts/private/build-memoir.mjs`
 - Create: `content/培琳/.gitignore`
 - Create: `private-content/README.md`
 
 **Interfaces:**
+
 - Consumes: `MEMOIR_MARKDOWN_B64` and `MEMOIR_PASSWORD` environment variables.
 - Produces: temporary `content/培琳/index.md` with password frontmatter and private body; exits nonzero if either secret is empty.
 
@@ -79,11 +85,13 @@
 ### Task 4: Migrate the private source without exposing it
 
 **Files:**
+
 - Modify: `scripts/legacy-extract-map.json`
 - Create locally only: `private-content/培琳/index.md`
 - Create locally only: `private-content/培琳/assets/`
 
 **Interfaces:**
+
 - Consumes: old `回忆录` HTML and Task 1 extractor.
 - Produces: a local Markdown source encoded for the `MEMOIR_MARKDOWN_B64` secret; no private source is tracked.
 
@@ -96,9 +104,11 @@
 ### Task 5: Update GitHub Pages workflow for secret injection
 
 **Files:**
+
 - Modify: `.github/workflows/deploy-pages.yaml:30-42`
 
 **Interfaces:**
+
 - Consumes: repository secrets `MEMOIR_MARKDOWN_B64` and `MEMOIR_PASSWORD`.
 - Produces: encrypted `public/` artifact and deployment; no private source remains after build.
 
@@ -110,9 +120,11 @@
 ### Task 6: Verify local build and deployment outputs
 
 **Files:**
+
 - Modify: `scripts/legacy-extraction-report.json` only if verification finds a conversion defect
 
 **Interfaces:**
+
 - Consumes: public content, temporary private source, test password, and Quartz build output.
 - Produces: verified `public/` output and a clean Git worktree.
 

@@ -6,6 +6,7 @@ tags:
 aliases:
   - /2021/10/23/test/
 ---
+
 ```c
 #include <iostream>
 using namesapce std;
@@ -15,6 +16,6 @@ int main() {
 }
 ```
 
-\$ 测试1\$
+$ 测试1$
 
 😄![](https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8)

@@ -5,9 +5,7 @@
     "output": "content/旧博客/test.md",
     "formulas": 2,
     "code_blocks": 1,
-    "images": [
-      "https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8"
-    ]
+    "images": ["https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8"]
   },
   {
     "title": "数论：质数与约数",

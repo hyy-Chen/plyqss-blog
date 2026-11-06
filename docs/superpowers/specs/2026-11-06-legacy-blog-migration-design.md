@@ -81,4 +81,3 @@ Verification consists of:
    content index, sitemap, RSS, and Git tracked files; and
 6. opening a generated private page and confirming that a wrong password fails
    while the test password reveals the article.
-
