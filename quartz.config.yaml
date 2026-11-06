@@ -7,7 +7,7 @@ configuration:
   analytics:
     provider: plausible
   locale: zh-CN
-  baseUrl: plyqss.top
+  baseUrl: plyqss.top/plyqss-blog
   ignorePatterns:
     - private
     - templates
