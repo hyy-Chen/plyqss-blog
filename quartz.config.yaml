@@ -114,7 +114,11 @@ plugins:
     options: {}
     order: 45
   - source: "@quartz-community/encrypted-pages"
-    enabled: false
+    enabled: true
+    options:
+      iterations: 600000
+      passwordField: password
+      unlistWhenEncrypted: true
   - source: "@quartz-community/stacked-pages"
     enabled: false
     layout:

@@ -33,8 +33,18 @@ jobs:
       - name: Install Quartz plugins
         run: npm run quartz -- plugin install
 
+      - name: Prepare private content
+        env:
+          MEMOIR_MARKDOWN_B64: ${{ secrets.MEMOIR_MARKDOWN_B64 }}
+          MEMOIR_PASSWORD: ${{ secrets.MEMOIR_PASSWORD }}
+        run: node scripts/private/build-memoir.mjs
+
       - name: Build site
         run: npm run quartz -- build
+
+      - name: Remove private source
+        if: always()
+        run: rm -rf content/培琳
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
