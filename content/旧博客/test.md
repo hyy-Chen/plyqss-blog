@@ -16,6 +16,6 @@ int main() {
 }
 ```
 
-$ 测试1$
+`测试1`
 
 😄![](https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8)
