@@ -98,6 +98,6 @@ if __name__=='__main__':
         report.append(convert(root/rel,title,date,alias,tags,out/(safe+'.md')))
     private_src=root/'2021/10/22/hui-yi-lu/index.html'
     private_out=Path(args.private_output or '/tmp/peilin-private/index.md')
-    report.append(convert(private_src,'培琳','2021-10-22','',['私密'],private_out,True))
+    convert(private_src,'培琳','2021-10-22','',['私密'],private_out,True)
     (out/'../legacy-extraction-report.json').resolve().write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps(report,ensure_ascii=False,indent=2))
