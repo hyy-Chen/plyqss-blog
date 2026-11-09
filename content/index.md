@@ -23,3 +23,5 @@ title: plyqss.top
 - [Hello World](旧博客/Hello-World)
 - [test](旧博客/test)
 - [欧拉](旧博客/欧拉)
+
+另有一篇加密的[回忆录](培琳/)，需要密码才能查看。
