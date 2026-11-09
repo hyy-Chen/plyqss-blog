@@ -29,7 +29,8 @@
     "output": "content/旧博客/欧拉.md",
     "formulas": 0,
     "code_blocks": 0,
-    "images": []
+    "images": [],
+    "note": "旧站 articleContent 为空，原文正文缺失；页面已补充存档说明"
   },
   {
     "title": "排列组合",

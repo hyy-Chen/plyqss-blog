@@ -40,7 +40,7 @@ jobs:
         run: node scripts/private/build-memoir.mjs
 
       - name: Build site
-        run: npm run quartz -- build
+        run: npm run build:site
 
       - name: Remove private source
         if: always()

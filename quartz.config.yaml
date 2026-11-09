@@ -7,7 +7,7 @@ configuration:
   analytics:
     provider: plausible
   locale: zh-CN
-  baseUrl: plyqss.top/plyqss-blog
+  baseUrl: www.plyqss.top/plyqss-blog
   ignorePatterns:
     - private
     - templates
@@ -238,7 +238,7 @@ plugins:
     enabled: true
     options:
       title: Recent Notes
-      limit: 5
+      limit: 12
       linkToMore: false
       showTags: true
     layout:
