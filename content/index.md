@@ -2,16 +2,17 @@
 title: plyqss.top
 ---
 
-# 欢迎来到 plyqss.top
-
-这里记录技术学习、实践过程和一些随笔。
-
-你可以从这些主题开始浏览：
-
-- [Go](Go/Go基础知识)
-- [MySQL](MySQL/MySQL事务)
-- [博客搭建记录](博客搭建记录)
-- [学习笔记](学习笔记/总览)
+<div class="home-hero">
+  <span class="home-hero__kicker">技术 · 实践 · 随笔</span>
+  <h2 class="home-hero__title">欢迎来到 plyqss.top</h2>
+  <p class="home-hero__lead">这里记录技术学习、实践过程和一些随笔。</p>
+  <div class="home-hero__links">
+    <a href="Go/Go基础知识">Go</a>
+    <a href="MySQL/MySQL事务">MySQL</a>
+    <a href="博客搭建记录">博客搭建记录</a>
+    <a href="学习笔记/总览">学习笔记</a>
+  </div>
+</div>
 
 ## 旧博客归档
 
@@ -23,6 +24,6 @@ title: plyqss.top
 
 ## 回忆录
 
-<a href="培琳/回忆录" data-router-ignore>打开加密回忆录 →</a>
+<a class="memoir-cta" href="培琳/回忆录" data-router-ignore>打开加密回忆录 <span aria-hidden="true">→</span></a>
 
 打开后需要输入密码才能查看内容。
