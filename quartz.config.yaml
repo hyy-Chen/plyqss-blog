@@ -143,9 +143,9 @@ plugins:
   - source: "@quartz-community/content-page"
     enabled: true
   - source: "@quartz-community/folder-page"
-    enabled: true
+    enabled: false
   - source: "@quartz-community/tag-page"
-    enabled: true
+    enabled: false
   - source: "@quartz-community/explorer"
     enabled: true
     layout:
@@ -153,6 +153,11 @@ plugins:
       priority: 50
   - source: "@quartz-community/graph"
     enabled: true
+    options:
+      localGraph:
+        showTags: false
+      globalGraph:
+        showTags: false
     layout:
       position: right
       priority: 10
@@ -202,7 +207,7 @@ plugins:
       priority: 35
       group: toolbar
   - source: "@quartz-community/breadcrumbs"
-    enabled: true
+    enabled: false
     layout:
       position: beforeBody
       priority: 5
@@ -240,7 +245,7 @@ plugins:
       title: Recent Notes
       limit: 12
       linkToMore: false
-      showTags: true
+      showTags: false
     layout:
       position: left
       priority: 25
@@ -262,7 +267,6 @@ plugins:
       includeAll: false
       includedProperties:
         - description
-        - tags
         - aliases
       excludedProperties: []
       hidePropertiesView: false

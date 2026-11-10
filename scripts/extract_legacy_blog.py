@@ -85,12 +85,9 @@ if __name__=='__main__':
     ap=argparse.ArgumentParser(); ap.add_argument('--source',required=True); ap.add_argument('--output',required=True); ap.add_argument('--private-output'); args=ap.parse_args()
     root=Path(args.source); out=Path(args.output)
     entries=[
-      ('2021/10/23/test/index.html','test','2021-10-23','/2021/10/23/test/',['旧博客']),
       ('2021/10/26/math-primes/index.html','数论：质数与约数','2021-10-26','/2021/10/26/math-primes/',['算法','数学']),
       ('2021/10/27/kuo-zhan-ou-ji-li-de-suan-fa/index.html','扩展欧几里得算法','2021-10-27','/2021/10/27/kuo-zhan-ou-ji-li-de-suan-fa/',['算法']),
-      ('2021/11/06/ou-la/index.html','欧拉','2021-11-06','/2021/11/06/ou-la/',['算法','数学']),
       ('2021/11/06/pai-lie-zu-he/index.html','排列组合','2021-11-06','/2021/11/06/pai-lie-zu-he/',['算法','数学']),
-      ('2023/05/10/hello-world/index.html','Hello World','2023-05-10','/2023/05/10/hello-world/',['随笔']),
     ]
     report=[]
     for rel,title,date,alias,tags in entries:

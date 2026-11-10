@@ -1,13 +1,5 @@
 [
   {
-    "title": "test",
-    "source": "/tmp/hyy-chen.github.io/2021/10/23/test/index.html",
-    "output": "content/旧博客/test.md",
-    "formulas": 2,
-    "code_blocks": 1,
-    "images": ["https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8"]
-  },
-  {
     "title": "数论：质数与约数",
     "source": "/tmp/hyy-chen.github.io/2021/10/26/math-primes/index.html",
     "output": "content/旧博客/数论-质数与约数.md",
@@ -24,28 +16,11 @@
     "images": []
   },
   {
-    "title": "欧拉",
-    "source": "/tmp/hyy-chen.github.io/2021/11/06/ou-la/index.html",
-    "output": "content/旧博客/欧拉.md",
-    "formulas": 0,
-    "code_blocks": 0,
-    "images": [],
-    "note": "旧站 articleContent 为空，原文正文缺失；页面已补充存档说明"
-  },
-  {
     "title": "排列组合",
     "source": "/tmp/hyy-chen.github.io/2021/11/06/pai-lie-zu-he/index.html",
     "output": "content/旧博客/排列组合.md",
     "formulas": 30,
     "code_blocks": 10,
-    "images": []
-  },
-  {
-    "title": "Hello World",
-    "source": "/tmp/hyy-chen.github.io/2023/05/10/hello-world/index.html",
-    "output": "content/旧博客/Hello-World.md",
-    "formulas": 4,
-    "code_blocks": 8,
     "images": []
   }
 ]

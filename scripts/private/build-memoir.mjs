@@ -11,7 +11,7 @@ let body
 try { body = Buffer.from(encoded, 'base64').toString('utf8') } catch { console.error('MEMOIR_MARKDOWN_B64 is invalid'); process.exit(1) }
 if (!body.trim()) { console.error('MEMOIR_MARKDOWN_B64 decoded to empty content'); process.exit(1) }
 const targetDir = resolve('content/培琳')
-const target = join(targetDir, 'index.md')
+const target = join(targetDir, '回忆录.md')
 await mkdir(targetDir, { recursive: true })
 const frontmatter = `---\ntitle: 培琳\nstealth: true\npassword: ${JSON.stringify(password)}\n---\n\n`
 await writeFile(target, frontmatter + body.replace(/^---[\s\S]*?---\s*/, ''), 'utf8')

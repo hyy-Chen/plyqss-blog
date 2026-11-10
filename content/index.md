@@ -11,7 +11,6 @@ title: plyqss.top
 - [Go](Go/Go基础知识)
 - [MySQL](MySQL/MySQL事务)
 - [博客搭建记录](博客搭建记录)
-- [旧博客归档](旧博客/)
 
 ## 旧博客归档
 
@@ -23,6 +22,6 @@ title: plyqss.top
 
 ## 回忆录
 
-<a href="培琳/" data-router-ignore>打开加密回忆录 →</a>
+<a href="培琳/回忆录" data-router-ignore>打开加密回忆录 →</a>
 
 打开后需要输入密码才能查看内容。
