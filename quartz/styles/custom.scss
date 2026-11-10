@@ -36,6 +36,12 @@
   --hero-dot: rgba(47, 111, 143, 0.16);
   --shadow-card: 0 20px 55px rgba(31, 62, 80, 0.11), 0 2px 10px rgba(31, 62, 80, 0.05);
   --shadow-soft: 0 8px 22px rgba(31, 62, 80, 0.08);
+  --companion-skin: #ffe3d3;
+  --companion-hair: #31414d;
+  --companion-cloth: #2f6f8f;
+  --companion-blush: rgba(233, 122, 122, 0.4);
+  --companion-line: #3b4c58;
+  --companion-surface: rgba(255, 255, 255, 0.94);
 }
 
 :root[saved-theme="dark"] {
@@ -70,6 +76,12 @@
   --hero-dot: rgba(180, 220, 235, 0.14);
   --shadow-card: 0 20px 55px rgba(0, 0, 0, 0.36), 0 2px 10px rgba(0, 0, 0, 0.2);
   --shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.24);
+  --companion-skin: #f3d5c4;
+  --companion-hair: #1b2832;
+  --companion-cloth: #7ec8e3;
+  --companion-blush: rgba(255, 150, 150, 0.32);
+  --companion-line: #26343e;
+  --companion-surface: rgba(23, 33, 41, 0.94);
 }
 
 // ============================================================================
@@ -210,6 +222,7 @@ a.internal:hover {
 }
 
 .page > #quartz-body > footer {
+  box-sizing: border-box;
   margin: 0 0 1.5rem;
   padding: 0.55rem 1.2rem;
   border: 1px solid var(--border);
@@ -437,6 +450,197 @@ tbody tr:hover > td {
 img {
   border-radius: 14px;
   box-shadow: var(--shadow-soft);
+}
+
+// ============================================================================
+// Site companion
+// ============================================================================
+
+#site-companion {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 60;
+  width: 96px;
+  height: 120px;
+}
+
+.companion-avatar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 96px;
+  height: 120px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  filter: drop-shadow(0 10px 16px rgba(31, 62, 80, 0.18));
+  animation: companion-float 3.6s ease-in-out infinite;
+  transition: filter 0.2s ease;
+
+  &:hover {
+    filter: drop-shadow(0 12px 20px rgba(47, 111, 143, 0.3));
+  }
+
+  .companion-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+}
+
+@keyframes companion-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.c-shadow {
+  fill: rgba(31, 62, 80, 0.12);
+}
+
+.c-body {
+  fill: var(--companion-cloth);
+}
+
+.c-collar {
+  fill: var(--companion-surface);
+}
+
+.c-bow {
+  fill: var(--accent-2);
+}
+
+.c-skin {
+  fill: var(--companion-skin);
+}
+
+.c-hair,
+.c-hair-side {
+  fill: var(--companion-hair);
+}
+
+.c-eye {
+  fill: #ffffff;
+}
+
+.c-pupil-dot {
+  fill: var(--companion-line);
+}
+
+.c-shine {
+  fill: #ffffff;
+}
+
+.c-blush {
+  fill: var(--companion-blush);
+}
+
+.c-mouth {
+  fill: none;
+  stroke: var(--companion-line);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.companion-head,
+.companion-eyes {
+  transform-box: view-box;
+  transition: transform 0.16s ease-out;
+}
+
+.companion-head {
+  transform-origin: 50px 78px;
+}
+
+.companion-eyes {
+  transform-origin: 50px 54px;
+
+  &.blink {
+    transform: scaleY(0.1);
+  }
+}
+
+.companion-bubble {
+  position: absolute;
+  right: 104px;
+  bottom: 74px;
+  max-width: 150px;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 14px 14px 4px 14px;
+  background-color: var(--companion-surface);
+  box-shadow: var(--shadow-soft);
+  color: var(--darkgray);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  pointer-events: none;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.companion-menu {
+  position: absolute;
+  right: 0;
+  bottom: 128px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
+  width: 164px;
+  padding: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background-color: var(--companion-surface);
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  transform: translateY(8px) scale(0.96);
+  transform-origin: bottom right;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  pointer-events: none;
+
+  &.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  button {
+    padding: 0.45rem 0.2rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background-color: var(--surface-soft);
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
+
+    &:hover {
+      background-color: var(--accent-soft);
+      color: var(--accent-2);
+      transform: translateY(-2px);
+    }
+  }
 }
 
 // ============================================================================
@@ -719,6 +923,27 @@ img {
   .page > #quartz-body > footer {
     margin: 0;
     border-radius: 14px;
+  }
+
+  #site-companion {
+    right: 0.7rem;
+    bottom: 0.7rem;
+    width: 72px;
+    height: 92px;
+  }
+
+  .companion-avatar {
+    width: 72px;
+    height: 92px;
+  }
+
+  .companion-bubble {
+    display: none;
+  }
+
+  .companion-menu {
+    bottom: 100px;
+    width: 150px;
   }
 }
 

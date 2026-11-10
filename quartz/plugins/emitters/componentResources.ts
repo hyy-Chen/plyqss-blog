@@ -8,6 +8,8 @@ import spaRouterScript from "../../components/scripts/spa.inline"
 import popoverScript from "../../components/scripts/popover.inline"
 // @ts-ignore
 import particleFieldScript from "../../components/scripts/particles.inline"
+// @ts-ignore
+import companionScript from "../../components/scripts/companion.inline"
 import baseStyles from "../../styles/base.scss"
 import customStyles from "../../styles/custom.scss"
 import popoverStyle from "../../components/styles/popover.scss"
@@ -94,6 +96,9 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
 
   // interactive falling-particle background
   componentResources.afterDOMLoaded.push(particleFieldScript)
+
+  // bottom-right companion with pointer-following eyes and quick navigation
+  componentResources.afterDOMLoaded.push(companionScript)
 
   if (cfg.analytics?.provider === "google") {
     const tagId = cfg.analytics.tagId

@@ -348,6 +348,7 @@ export function renderPage(
       <Head {...componentData} />
       <body data-slug={slug} data-basepath={basePath}>
         <canvas id="particle-field" aria-hidden="true" />
+        <aside id="site-companion" data-persist="" aria-label="站点导航助手" />
         {frame.css && <style dangerouslySetInnerHTML={{ __html: frame.css }} />}
         <div id="quartz-root" class="page" data-frame={frame.name}>
           <Body {...componentData}>
