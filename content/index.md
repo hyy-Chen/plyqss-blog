@@ -11,6 +11,7 @@ title: plyqss.top
 - [Go](Go/Go基础知识)
 - [MySQL](MySQL/MySQL事务)
 - [博客搭建记录](博客搭建记录)
+- [学习笔记](学习笔记/总览)
 
 ## 旧博客归档
 
