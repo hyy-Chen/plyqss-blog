@@ -3,3 +3,4 @@ node_modules
 .quartz-cache
 .playwright-cli
 quartz/static/katex
+quartz/static/live2d
