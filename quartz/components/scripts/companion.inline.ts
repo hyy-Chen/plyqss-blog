@@ -62,6 +62,11 @@ function markFallback() {
 function startLive2D() {
   if (reduced || live2dStarted) return
   live2dStarted = true
+  const preload = document.createElement("link")
+  preload.rel = "preload"
+  preload.as = "image"
+  preload.href = asset("models/rem/moc/remu2048/texture_00.webp")
+  document.head.appendChild(preload)
   const script = document.createElement("script")
   script.src = asset("L2Dwidget.min.js")
   script.async = true
