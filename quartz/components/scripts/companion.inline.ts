@@ -18,7 +18,6 @@ let menu: HTMLElement | null = null
 let bubbleTimer = 0
 let indexPromise: Promise<Record<string, unknown>> | null = null
 let live2dStarted = false
-let widgetObserver: MutationObserver | null = null
 
 const markup = `
 <div class="companion-bubble" role="status">点我打开导航</div>
@@ -52,6 +51,7 @@ function mountWidget(): boolean {
   widget.style.right = "0"
   widget.style.bottom = "0"
   widget.style.zIndex = "0"
+  container.removeAttribute("data-live2d")
   return true
 }
 
@@ -87,17 +87,20 @@ function startLive2D() {
       react: { opacity: 1 },
       dialog: { enable: false },
     })
-    if (mountWidget()) return
-    widgetObserver = new MutationObserver(() => {
-      if (mountWidget()) widgetObserver?.disconnect()
-    })
-    widgetObserver.observe(document.body, { childList: true })
-    window.setTimeout(() => widgetObserver?.disconnect(), 10000)
+    mountWidget()
   }
   document.head.appendChild(script)
+
+  // A cold connection can delay the runtime and model for a while. Keep trying
+  // to mount the widget, and only fall back if the runtime never arrived.
+  const retry = window.setInterval(() => {
+    if (mountWidget()) window.clearInterval(retry)
+  }, 600)
   window.setTimeout(() => {
-    if (!mountWidget()) markFallback()
-  }, 12000)
+    window.clearInterval(retry)
+    const api = (window as Window & { L2Dwidget?: Live2DWidget }).L2Dwidget
+    if (!api?.init && !mountWidget()) markFallback()
+  }, 30000)
 }
 
 function attach() {
