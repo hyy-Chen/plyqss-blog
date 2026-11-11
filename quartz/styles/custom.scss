@@ -462,23 +462,44 @@ img {
 
 .companion-avatar {
   position: absolute;
-  top: 0;
-  left: 50%;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background-color: var(--companion-surface);
+  box-shadow: var(--shadow-soft);
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  pointer-events: auto;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    background-color: var(--accent-soft);
+  }
+}
+
+.companion-hit {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 1;
   width: 120px;
   height: 100%;
-  padding: 0;
-  border: none;
-  background: transparent;
-  cursor: pointer;
   transform: translateX(-50%);
+  cursor: pointer;
   pointer-events: auto;
-
-  .companion-fallback {
-    display: none;
-  }
 }
 
 #site-companion[data-live2d="off"] {
@@ -487,20 +508,18 @@ img {
 
   .companion-avatar {
     position: relative;
-    top: auto;
-    left: auto;
+    right: auto;
+    bottom: auto;
     width: 58px;
     height: 58px;
-    border-radius: 50%;
+    border: none;
     background-color: var(--accent);
-    box-shadow: var(--shadow-soft);
     color: var(--accent-ink);
     font-size: 0.85rem;
-    transform: none;
   }
 
-  .companion-fallback {
-    display: inline;
+  .companion-hit {
+    display: none;
   }
 
   .companion-bubble {
@@ -545,6 +564,7 @@ img {
   position: absolute;
   right: 148px;
   bottom: 70px;
+  z-index: 3;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.4rem;

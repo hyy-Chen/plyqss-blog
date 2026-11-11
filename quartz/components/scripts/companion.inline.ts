@@ -30,8 +30,9 @@ const markup = `
   <button type="button" data-companion-action="top">顶部</button>
   <button type="button" data-companion-action="theme">主题</button>
 </nav>
+<div class="companion-hit" aria-hidden="true"></div>
 <button class="companion-avatar" type="button" aria-label="打开快捷导航" aria-expanded="false">
-  <span class="companion-fallback" aria-hidden="true">导航</span>
+  <span class="companion-label" aria-hidden="true">导航</span>
 </button>`
 
 function basePath(): string {
@@ -54,18 +55,21 @@ function mountWidget(): boolean {
   return true
 }
 
+function markFallback() {
+  document.getElementById(containerId)?.setAttribute("data-live2d", "off")
+}
+
 function startLive2D() {
   if (reduced || live2dStarted) return
   live2dStarted = true
-  const container = document.getElementById(containerId)
   const script = document.createElement("script")
   script.src = asset("L2Dwidget.min.js")
   script.async = true
-  script.onerror = () => container?.setAttribute("data-live2d", "off")
+  script.onerror = markFallback
   script.onload = () => {
     const api = (window as Window & { L2Dwidget?: Live2DWidget }).L2Dwidget
     if (!api?.init) {
-      container?.setAttribute("data-live2d", "off")
+      markFallback()
       return
     }
     api.init({
@@ -91,6 +95,9 @@ function startLive2D() {
     window.setTimeout(() => widgetObserver?.disconnect(), 10000)
   }
   document.head.appendChild(script)
+  window.setTimeout(() => {
+    if (!mountWidget()) markFallback()
+  }, 12000)
 }
 
 function attach() {
@@ -199,7 +206,7 @@ say("点我打开导航", 4200)
 
 document.addEventListener("pointerover", (event) => {
   const target = event.target as Element | null
-  if (target?.closest(".companion-avatar") && !menu?.classList.contains("open")) {
+  if (target?.closest(".companion-avatar, .companion-hit") && !menu?.classList.contains("open")) {
     say("点我打开导航", 1600)
   }
 })
@@ -214,7 +221,7 @@ document.addEventListener("click", (event) => {
     void runAction(actionEl.getAttribute("data-companion-action") as Action)
     return
   }
-  if (target.closest(".companion-avatar")) {
+  if (target.closest(".companion-avatar, .companion-hit")) {
     event.preventDefault()
     setMenu(!menu?.classList.contains("open"))
     return
