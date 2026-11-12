@@ -97,7 +97,7 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
   // interactive falling-particle background
   componentResources.afterDOMLoaded.push(particleFieldScript)
 
-  // bottom-right companion with pointer-following eyes and quick navigation
+  // bottom-right quick navigation (no Live2D model)
   componentResources.afterDOMLoaded.push(companionScript)
 
   if (cfg.analytics?.provider === "google") {

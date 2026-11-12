@@ -443,7 +443,7 @@ img {
 }
 
 // ============================================================================
-// Site companion
+// Site companion (quick navigation only, no Live2D model)
 // ============================================================================
 
 #site-companion {
@@ -451,33 +451,29 @@ img {
   right: 1.5rem;
   bottom: 1.5rem;
   z-index: 60;
-  width: 200px;
-  height: 300px;
-  pointer-events: none;
-}
-
-#companion-live2d {
+  width: auto;
+  height: auto;
   pointer-events: none;
 }
 
 .companion-avatar {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  right: auto;
+  bottom: auto;
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 58px;
+  height: 58px;
   padding: 0;
-  border: 1px solid var(--border);
+  border: none;
   border-radius: 50%;
-  background-color: var(--companion-surface);
+  background-color: var(--accent);
   box-shadow: var(--shadow-soft);
-  color: var(--accent);
+  color: var(--accent-ink);
   font-family: inherit;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   cursor: pointer;
   pointer-events: auto;
   transition:
@@ -490,53 +486,10 @@ img {
   }
 }
 
-.companion-hit {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  z-index: 1;
-  width: 120px;
-  height: 100%;
-  transform: translateX(-50%);
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-#site-companion[data-live2d="off"] {
-  width: auto;
-  height: auto;
-
-  .companion-avatar {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    width: 58px;
-    height: 58px;
-    border: none;
-    background-color: var(--accent);
-    color: var(--accent-ink);
-    font-size: 0.85rem;
-  }
-
-  .companion-hit {
-    display: none;
-  }
-
-  .companion-bubble {
-    right: 70px;
-    bottom: 16px;
-  }
-
-  .companion-menu {
-    right: 0;
-    bottom: 70px;
-  }
-}
-
 .companion-bubble {
   position: absolute;
-  right: 152px;
-  bottom: 208px;
+  right: 70px;
+  bottom: 16px;
   max-width: 150px;
   padding: 0.45rem 0.8rem;
   border: 1px solid var(--border);
@@ -562,7 +515,7 @@ img {
 
 .companion-menu {
   position: absolute;
-  right: 148px;
+  right: 0;
   bottom: 70px;
   z-index: 3;
   display: grid;
@@ -895,8 +848,6 @@ img {
   #site-companion {
     right: 0.7rem;
     bottom: 0.7rem;
-    transform: scale(0.68);
-    transform-origin: bottom right;
   }
 
   .companion-bubble {

@@ -1,15 +1,9 @@
-// Site companion: a real Live2D model in the bottom-right corner.
-// The model follows the pointer on its own, so we only keep the quick-navigation menu.
+// Site companion: a lightweight quick-navigation button in the bottom-right corner.
+// The Live2D model was removed: its runtime and textures dominated page load time.
 
 type Action = "home" | "notes" | "random" | "search" | "top" | "theme"
 
-type Live2DWidget = {
-  init: (config: Record<string, unknown>) => void
-}
-
 const containerId = "site-companion"
-const widgetDivId = "companion-live2d"
-const widgetCanvasId = "companion-live2d-canvas"
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 let avatar: HTMLButtonElement | null = null
@@ -17,7 +11,6 @@ let bubble: HTMLElement | null = null
 let menu: HTMLElement | null = null
 let bubbleTimer = 0
 let indexPromise: Promise<Record<string, unknown>> | null = null
-let live2dStarted = false
 
 const markup = `
 <div class="companion-bubble" role="status">点我打开导航</div>
@@ -29,83 +22,12 @@ const markup = `
   <button type="button" data-companion-action="top">顶部</button>
   <button type="button" data-companion-action="theme">主题</button>
 </nav>
-<div class="companion-hit" aria-hidden="true"></div>
 <button class="companion-avatar" type="button" aria-label="打开快捷导航" aria-expanded="false">
   <span class="companion-label" aria-hidden="true">导航</span>
 </button>`
 
 function basePath(): string {
   return document.body.dataset.basepath || ""
-}
-
-function asset(file: string): string {
-  return `${basePath()}/static/live2d/${file}`
-}
-
-function mountWidget(): boolean {
-  const widget = document.getElementById(widgetDivId)
-  const container = document.getElementById(containerId)
-  if (!widget || !container) return false
-  if (widget.parentElement !== container) container.appendChild(widget)
-  widget.style.position = "absolute"
-  widget.style.right = "0"
-  widget.style.bottom = "0"
-  widget.style.zIndex = "0"
-  container.removeAttribute("data-live2d")
-  return true
-}
-
-function markFallback() {
-  document.getElementById(containerId)?.setAttribute("data-live2d", "off")
-}
-
-function startLive2D() {
-  if (reduced || live2dStarted) return
-  live2dStarted = true
-  const preload = document.createElement("link")
-  preload.rel = "preload"
-  preload.as = "image"
-  preload.href = asset("models/rem/moc/remu2048/texture_00.webp")
-  document.head.appendChild(preload)
-  const script = document.createElement("script")
-  script.src = asset("L2Dwidget.min.js")
-  script.async = true
-  script.onerror = markFallback
-  script.onload = () => {
-    const api = (window as Window & { L2Dwidget?: Live2DWidget }).L2Dwidget
-    if (!api?.init) {
-      markFallback()
-      return
-    }
-    api.init({
-      model: { jsonPath: asset("models/rem/rem.model.json"), scale: 1.1 },
-      display: {
-        superSample: 2,
-        width: 200,
-        height: 300,
-        position: "right",
-        hOffset: 0,
-        vOffset: 0,
-      },
-      mobile: { show: true, scale: 1, motion: true },
-      name: { div: widgetDivId, canvas: widgetCanvasId },
-      react: { opacity: 1 },
-      dialog: { enable: false },
-    })
-    mountWidget()
-  }
-  document.head.appendChild(script)
-
-  // A cold connection can delay the runtime and model for a while. Keep trying
-  // to mount the widget, and only fall back if the runtime never arrived.
-  const retry = window.setInterval(() => {
-    if (mountWidget()) window.clearInterval(retry)
-  }, 600)
-  window.setTimeout(() => {
-    window.clearInterval(retry)
-    const api = (window as Window & { L2Dwidget?: Live2DWidget }).L2Dwidget
-    if (!api?.init && !mountWidget()) markFallback()
-  }, 30000)
 }
 
 function attach() {
@@ -120,13 +42,10 @@ function attach() {
   if (el.dataset.ready !== "true") {
     el.innerHTML = markup
     el.dataset.ready = "true"
-    if (reduced) el.dataset.live2d = "off"
   }
   avatar = el.querySelector(".companion-avatar")
   bubble = el.querySelector(".companion-bubble")
   menu = el.querySelector(".companion-menu")
-  mountWidget()
-  startLive2D()
 }
 
 function say(text: string, duration = 1800) {
@@ -214,7 +133,7 @@ say("点我打开导航", 4200)
 
 document.addEventListener("pointerover", (event) => {
   const target = event.target as Element | null
-  if (target?.closest(".companion-avatar, .companion-hit") && !menu?.classList.contains("open")) {
+  if (target?.closest(".companion-avatar") && !menu?.classList.contains("open")) {
     say("点我打开导航", 1600)
   }
 })
@@ -229,7 +148,7 @@ document.addEventListener("click", (event) => {
     void runAction(actionEl.getAttribute("data-companion-action") as Action)
     return
   }
-  if (target.closest(".companion-avatar, .companion-hit")) {
+  if (target.closest(".companion-avatar")) {
     event.preventDefault()
     setMenu(!menu?.classList.contains("open"))
     return
