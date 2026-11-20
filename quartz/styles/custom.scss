@@ -386,12 +386,51 @@ blockquote {
   background-color: var(--surface-soft);
 }
 
+// ============================================================================
+// Code blocks & parameter tables
+// ============================================================================
+
 pre {
-  padding: 0.9rem;
+  margin: 1.3rem 0;
+  padding: 0.85rem 1rem;
   border: 1px solid var(--border);
   border-radius: 14px;
   background-color: var(--code-bg);
   box-shadow: inset 0 1px 0 var(--border);
+  tab-size: 4;
+}
+
+// base.scss zeroes the inner pre padding for highlighted figures; restore the
+// same card rhythm as plain pre blocks.
+figure[data-rehype-pretty-code-figure] {
+  margin: 1.3rem 0;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background-color: var(--code-bg);
+  box-shadow: inset 0 1px 0 var(--border);
+  overflow: hidden;
+
+  & > [data-rehype-pretty-code-title] {
+    width: auto;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    background-color: var(--surface-soft);
+    color: var(--darkgray);
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+  }
+
+  & > pre {
+    margin: 0;
+    padding: 0.85rem 1rem;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
 }
 
 pre > code {
@@ -410,31 +449,65 @@ code {
 }
 
 .table-container {
-  margin: 1.25rem 0;
-  padding: 0.25rem;
+  max-width: 100%;
+  margin: 1.35rem 0;
+  padding: 0;
   border: 1px solid var(--border);
   border-radius: 14px;
-  background-color: var(--surface-soft);
+  background-color: var(--surface);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .table-container > table {
   width: 100%;
+  min-width: 34rem;
   margin: 0;
   padding: 0;
+  border-collapse: collapse;
+  line-height: 1.65;
 }
 
-th {
+.table-container > table th,
+.table-container > table td {
+  padding: 0.6rem 0.9rem;
+  vertical-align: top;
+  text-align: left;
+  line-height: 1.65;
+}
+
+.table-container > table thead th {
+  white-space: nowrap;
   border-bottom: 1px solid var(--border-strong);
-  background-color: var(--surface);
+  background-color: var(--surface-soft);
   color: var(--dark);
+  font-weight: 600;
 }
 
-td {
+.table-container > table tbody td {
   border-bottom: 1px solid var(--border);
 }
 
-tbody tr:hover > td {
+.table-container > table tbody tr:last-child > td {
+  border-bottom: none;
+}
+
+.table-container > table tbody tr:hover > td {
   background-color: var(--highlight);
+}
+
+.table-container > table code {
+  padding: 0.1rem 0.3rem;
+  border-radius: 5px;
+  font-size: 0.85em;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.table-container > table > tbody > tr > td:first-child {
+  min-width: 8rem;
 }
 
 img {
@@ -787,6 +860,24 @@ img {
     margin: 0;
     padding: 1rem 1.1rem 1.4rem;
     border-radius: 18px;
+  }
+
+  .table-container {
+    border-radius: 12px;
+  }
+
+  .table-container > table {
+    min-width: 32rem;
+  }
+
+  .table-container > table th,
+  .table-container > table td {
+    padding: 0.5rem 0.7rem;
+  }
+
+  pre,
+  figure[data-rehype-pretty-code-figure] > pre {
+    padding: 0.7rem 0.8rem;
   }
 
   .home-hero {
